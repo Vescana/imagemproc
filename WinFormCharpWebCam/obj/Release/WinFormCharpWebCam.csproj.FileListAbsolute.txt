@@ -1,0 +1,11 @@
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\bin\Release\WinFormCharpWebCam.exe
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\bin\Release\WinFormCharpWebCam.pdb
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\ResolveAssemblyReference.cache
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.mainWinForm.resources
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.Properties.Resources.resources
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\GenerateResource-ResGen.read.1.tlog
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\GenerateResource-ResGen.write.1.tlog
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.exe
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\WinFormCharpWebCam.pdb
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\ResGen.read.1.tlog
+C:\Users\max\Desktop\EasyWebCam\WinFormCharpWebCam\obj\Release\ResGen.write.1.tlog
