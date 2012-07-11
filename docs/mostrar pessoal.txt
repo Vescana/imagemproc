@@ -1,5 +1,0 @@
-http://www.computer-vision-software.com/blog/tag/barcode-detection/
-http://www.cs.iit.edu/~agam/cs512/lect-notes/opencv-intro/opencv-intro.html
-http://www710.univ-lyon1.fr/~bouakaz/OpenCV-0.9.5/docs/ref/OpenCVRef_ImageProcessing.htm
-
-http://www.google.com/patents/US20070181691
