@@ -45,26 +45,25 @@
             // imgVideo
             // 
             this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgVideo.Location = new System.Drawing.Point(55, 41);
+            this.imgVideo.Location = new System.Drawing.Point(12, 12);
             this.imgVideo.Name = "imgVideo";
-            this.imgVideo.Size = new System.Drawing.Size(163, 160);
+            this.imgVideo.Size = new System.Drawing.Size(320, 240);
             this.imgVideo.TabIndex = 0;
             this.imgVideo.TabStop = false;
-            //this.imgVideo.BackgroundImageChanged += new System.EventHandler(this.imgVideo_BackgroundImageChanged);
             this.imgVideo.Click += new System.EventHandler(this.imgVideo_Click);
             // 
             // imgCapture
             // 
             this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgCapture.Location = new System.Drawing.Point(242, 41);
+            this.imgCapture.Location = new System.Drawing.Point(338, 12);
             this.imgCapture.Name = "imgCapture";
-            this.imgCapture.Size = new System.Drawing.Size(163, 160);
+            this.imgCapture.Size = new System.Drawing.Size(320, 240);
             this.imgCapture.TabIndex = 1;
             this.imgCapture.TabStop = false;
             // 
             // bntStart
             // 
-            this.bntStart.Location = new System.Drawing.Point(55, 216);
+            this.bntStart.Location = new System.Drawing.Point(10, 270);
             this.bntStart.Name = "bntStart";
             this.bntStart.Size = new System.Drawing.Size(41, 23);
             this.bntStart.TabIndex = 2;
@@ -74,7 +73,7 @@
             // 
             // bntStop
             // 
-            this.bntStop.Location = new System.Drawing.Point(102, 216);
+            this.bntStop.Location = new System.Drawing.Point(57, 270);
             this.bntStop.Name = "bntStop";
             this.bntStop.Size = new System.Drawing.Size(49, 23);
             this.bntStop.TabIndex = 3;
@@ -84,7 +83,7 @@
             // 
             // bntContinue
             // 
-            this.bntContinue.Location = new System.Drawing.Point(157, 216);
+            this.bntContinue.Location = new System.Drawing.Point(112, 270);
             this.bntContinue.Name = "bntContinue";
             this.bntContinue.Size = new System.Drawing.Size(61, 23);
             this.bntContinue.TabIndex = 4;
@@ -94,7 +93,7 @@
             // 
             // bntCapture
             // 
-            this.bntCapture.Location = new System.Drawing.Point(242, 216);
+            this.bntCapture.Location = new System.Drawing.Point(188, 270);
             this.bntCapture.Name = "bntCapture";
             this.bntCapture.Size = new System.Drawing.Size(85, 23);
             this.bntCapture.TabIndex = 5;
@@ -104,7 +103,7 @@
             // 
             // bntSave
             // 
-            this.bntSave.Location = new System.Drawing.Point(326, 216);
+            this.bntSave.Location = new System.Drawing.Point(272, 270);
             this.bntSave.Name = "bntSave";
             this.bntSave.Size = new System.Drawing.Size(79, 23);
             this.bntSave.TabIndex = 6;
@@ -114,7 +113,7 @@
             // 
             // bntVideoFormat
             // 
-            this.bntVideoFormat.Location = new System.Drawing.Point(425, 100);
+            this.bntVideoFormat.Location = new System.Drawing.Point(366, 270);
             this.bntVideoFormat.Name = "bntVideoFormat";
             this.bntVideoFormat.Size = new System.Drawing.Size(147, 23);
             this.bntVideoFormat.TabIndex = 7;
@@ -124,7 +123,7 @@
             // 
             // bntVideoSource
             // 
-            this.bntVideoSource.Location = new System.Drawing.Point(425, 129);
+            this.bntVideoSource.Location = new System.Drawing.Point(511, 270);
             this.bntVideoSource.Name = "bntVideoSource";
             this.bntVideoSource.Size = new System.Drawing.Size(147, 23);
             this.bntVideoSource.TabIndex = 8;
@@ -136,7 +135,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 362);
+            this.ClientSize = new System.Drawing.Size(670, 304);
             this.Controls.Add(this.bntVideoSource);
             this.Controls.Add(this.bntVideoFormat);
             this.Controls.Add(this.bntSave);
