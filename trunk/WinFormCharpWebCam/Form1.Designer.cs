@@ -29,7 +29,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.imgVideo = new System.Windows.Forms.PictureBox();
             this.imgCapture = new System.Windows.Forms.PictureBox();
             this.bntStart = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
@@ -38,24 +37,13 @@
             this.bntSave = new System.Windows.Forms.Button();
             this.bntVideoFormat = new System.Windows.Forms.Button();
             this.bntVideoSource = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.SuspendLayout();
-            // 
-            // imgVideo
-            // 
-            this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgVideo.Location = new System.Drawing.Point(12, 12);
-            this.imgVideo.Name = "imgVideo";
-            this.imgVideo.Size = new System.Drawing.Size(320, 240);
-            this.imgVideo.TabIndex = 0;
-            this.imgVideo.TabStop = false;
-            this.imgVideo.Click += new System.EventHandler(this.imgVideo_Click);
             // 
             // imgCapture
             // 
             this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgCapture.Location = new System.Drawing.Point(338, 12);
+            this.imgCapture.Location = new System.Drawing.Point(10, 12);
             this.imgCapture.Name = "imgCapture";
             this.imgCapture.Size = new System.Drawing.Size(320, 240);
             this.imgCapture.TabIndex = 1;
@@ -144,11 +132,9 @@
             this.Controls.Add(this.bntStop);
             this.Controls.Add(this.bntStart);
             this.Controls.Add(this.imgCapture);
-            this.Controls.Add(this.imgVideo);
             this.Name = "mainWinForm";
             this.Text = "WinForm C# WebCam";
             this.Load += new System.EventHandler(this.mainWinForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).EndInit();
             this.ResumeLayout(false);
 
@@ -156,7 +142,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox imgVideo;
         private System.Windows.Forms.PictureBox imgCapture;
         private System.Windows.Forms.Button bntStart;
         private System.Windows.Forms.Button bntStop;
