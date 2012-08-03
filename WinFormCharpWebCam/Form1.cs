@@ -22,7 +22,7 @@ namespace WinFormCharpWebCam
         private void mainWinForm_Load(object sender, EventArgs e)
         {
             webcam = new WebCam();
-            webcam.InitializeWebCam(ref imgVideo, ref imgCapture);
+            webcam.InitializeWebCam(ref imgCapture);
         }
 
         private void bntStart_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace WinFormCharpWebCam
         {
 
             //imgCapture.Image = imgVideo.Image;
-            imgVideo.Image.Save("C:\\Users\\max\\Desktop\\EasyWebCam\\saida.bmp");
+            /*imgVideo.Image.Save("C:\\Users\\max\\Desktop\\EasyWebCam\\saida.bmp");
                    
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "C:\\Users\\max\\Desktop\\EasyWebCam\\WinFormCharpWebCam\\Release\\OpenCV.EXE";
@@ -62,7 +62,7 @@ namespace WinFormCharpWebCam
             p.Close();
             
            imgCapture.WaitOnLoad = false;
-           imgCapture.LoadAsync("C:\\Users\\max\\Desktop\\EasyWebCam\\saida2.bmp"); ;
+           imgCapture.LoadAsync("C:\\Users\\max\\Desktop\\EasyWebCam\\saida2.bmp"); ;*/
 
         }
 

@@ -21,7 +21,7 @@ namespace WinFormCharpWebCam
         
         private int FrameNumber = 30;
 
-        public void InitializeWebCam(ref System.Windows.Forms.PictureBox ImageControl, ref System.Windows.Forms.PictureBox ImageControl2)
+        public void InitializeWebCam(ref System.Windows.Forms.PictureBox ImageControl2)
         {
             // define os parametros de inicializacao da camera 
             // chamado na construcao do form main 
@@ -31,7 +31,7 @@ namespace WinFormCharpWebCam
 
 
             webcam.ImageCaptured += new WebCamCapture.WebCamEventHandler(webcam_ImageCaptured);
-            _FrameImage = ImageControl;
+            //_FrameImage = ImageControl;
             _FrameImage2 = ImageControl2;
         }
 
@@ -43,13 +43,13 @@ namespace WinFormCharpWebCam
 
            // Process.Start("IExplore.exe", "C:\\myPath\\myFile.htm");
            // Process.Start("IExplore.exe");
-            _FrameImage.Image = e.WebCamImage;
+            //_FrameImage.Image = e.WebCamImage;
             // O problema aqui era permissão. Tem que salvar em uma pasta com permissao
 
 
 
             //imgCapture.Image = imgVideo.Image;
-            _FrameImage.Image.Save("C:\\imagemproc\\saida.bmp");
+            e.WebCamImage.Save("C:\\imagemproc\\saida.bmp");
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "C:\\imagemproc\\WinFormCharpWebCam\\Release\\OpenCV.EXE";
