@@ -11,6 +11,9 @@
 // Código do recognize
 // --------------------
 
+// Adicionado código para escrita de reconhecimento em arquivo
+FILE *fp;
+
 //// Global variables
 IplImage ** faceImgArr        = 0; // array of face images
 CvMat    *  personNumTruthMat = 0; // array of person numbers
@@ -41,10 +44,10 @@ void learn()
 
 	// load training data
 	nTrainFaces = loadFaceImgArray("train.txt");
-	if( nTrainFaces < 1 ) // Alterado face mínima para 1
+	if( nTrainFaces < 2 )
 	{
 		fprintf(stderr,
-		        "Need 1 or more training faces\n"
+		        "Need 2 or more training faces\n"
 		        "Input file contains only %d\n", nTrainFaces);
 		return;
 	}
@@ -82,6 +85,9 @@ void recognize()
 	CvMat * trainPersonNumMat = 0;  // the person numbers during training
 	float * projectedTestFace = 0;
 
+	// adicionado código para escrita em arquivo
+	fp = fopen ("recognize.txt","w");
+
 	// load test images and ground truth for person number
 	nTestFaces = loadFaceImgArray("test.txt");
 	printf("%d test faces loaded\n", nTestFaces);
@@ -108,8 +114,11 @@ void recognize()
 		truth    = personNumTruthMat->data.i[i];
 		nearest  = trainPersonNumMat->data.i[iNearest];
 
-		printf("nearest = %d, Truth = %d\n", nearest, truth);
+		//printf para fprintf
+		fprintf(fp, "nearest = %d, Truth = %d\n", nearest, truth);
 	}
+
+	fclose(fp);
 }
 
 
@@ -376,6 +385,38 @@ CvRect detectFaceInImage(IplImage *inputImg, CvHaarClassifierCascade* cascade)
 }
 
 */
+
+// Código para recortar face
+
+// Returns a new image that is a cropped version (rectangular cut-out)
+// of the original image.
+IplImage* cropImage(const IplImage *img, const CvRect region)
+{
+	IplImage *imageCropped;
+	CvSize size;
+
+	if (img->width <= 0 || img->height <= 0
+		|| region.width <= 0 || region.height <= 0) {
+		//cerr << "ERROR in cropImage(): invalid dimensions." << endl;
+		exit(1);
+	}
+
+	if (img->depth != IPL_DEPTH_8U) {
+		//cerr << "ERROR in cropImage(): image depth is not 8." << endl;
+		exit(1);
+	}
+
+	// Set the desired region of interest.
+	cvSetImageROI((IplImage*)img, region);
+	// Copy region of interest into a new iplImage and return it.
+	size.width = region.width;
+	size.height = region.height;
+	imageCropped = cvCreateImage(size, IPL_DEPTH_8U, img->nChannels);
+	cvCopy(img, imageCropped);	// Copy just the region.
+
+	return imageCropped;
+}
+
 int main(int argc, char** argv)
 {
   IplImage *inputImg = cvLoadImage(argv[1]);
@@ -397,6 +438,9 @@ pStorage=cvCreateMemStorage(0);
 pFaceRectSeq = cvHaarDetectObjects(inputImg,faceCascade,pStorage,1.1,3,CV_HAAR_DO_CANNY_PRUNING,cvSize(0,0));
 int i=0;
 
+//IplImage *imageCut;
+//imageCut = inputImg;
+
 if (i<pFaceRectSeq->total) 
 {
 	for (i=0;i<=pFaceRectSeq->total;i++)
@@ -404,14 +448,21 @@ if (i<pFaceRectSeq->total)
 		CvRect * r = (CvRect *)cvGetSeqElem(pFaceRectSeq,i);
 		CvPoint pt1 = {r->x,r->y};
 		CvPoint pt2 = {r->x +r->width  ,r->y+r->height};
-		cvRectangle(inputImg,pt1,pt2,CV_RGB(255,0,0),3,4,0);
 
+		// Código para salvar imagem da face detectada
+		IplImage *imageCut;
+		imageCut = cropImage(inputImg, *r);
+		cvSaveImage("C:\\imagemproc\\saida_cut.bmp", imageCut);
+
+		// Adiciona o retângulo na face
+		cvRectangle(inputImg,pt1,pt2,CV_RGB(255,0,0),3,4,0);
 	}
 }
+
 	//cvNamedWindow( "Source", 1 );
 	//cvShowImage( "Source", inputImg );
 	//cvWaitKey(0);
-	cvSaveImage("C:\\imagemproc\\saida2.bmp",inputImg);
+	cvSaveImage("C:\\imagemproc\\saida2.bmp", inputImg);
 	
 	//Face Recognition
 	// Either convert the image to greyscale, or use the existing greyscale image.
@@ -453,8 +504,8 @@ if (i<pFaceRectSeq->total)
 	if(faceCascade) cvReleaseHaarClassifierCascade(&faceCascade);
 
 	//Executado comandos do recognize
-	learn();
-	recognize();
+	//learn(); //Comentado o Recognize para testes
+	//recognize();
 
 }
 

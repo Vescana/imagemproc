@@ -55,8 +55,8 @@ namespace WinFormCharpWebCam
             startInfo.FileName = "C:\\imagemproc\\WinFormCharpWebCam\\Release\\OpenCV.EXE";
             startInfo.Arguments = "C:\\imagemproc\\saida.bmp";
             startInfo.CreateNoWindow = true;
-            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            //startInfo.UseShellExecute = false;
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.UseShellExecute = false;
             Process p;
             p = Process.Start(startInfo);
 
