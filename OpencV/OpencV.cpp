@@ -453,6 +453,7 @@ if (i<pFaceRectSeq->total)
 		IplImage *imageCut;
 		imageCut = cropImage(inputImg, *r);
 		cvSaveImage("C:\\imagemproc\\saida_cut.bmp", imageCut);
+		cvReleaseImage(&imageCut);
 
 		// Adiciona o retângulo na face
 		cvRectangle(inputImg,pt1,pt2,CV_RGB(255,0,0),3,4,0);
