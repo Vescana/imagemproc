@@ -115,7 +115,8 @@ void recognize()
 		nearest  = trainPersonNumMat->data.i[iNearest];
 
 		//printf para fprintf
-		fprintf(fp, "nearest = %d, Truth = %d\n", nearest, truth);
+		// fprintf(fp, "nearest = %d, Truth = %d\n", nearest, truth);
+		fprintf(fp, "%d\n", nearest);
 	}
 
 	fclose(fp);

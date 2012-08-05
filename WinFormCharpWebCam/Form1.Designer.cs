@@ -40,6 +40,7 @@
             this.captureTest1 = new System.Windows.Forms.Button();
             this.captureTest2 = new System.Windows.Forms.Button();
             this.recognize = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFace1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFace2)).BeginInit();
@@ -154,11 +155,19 @@
             this.recognize.UseVisualStyleBackColor = true;
             this.recognize.Click += new System.EventHandler(this.recognize_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(435, 170);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(133, 20);
+            this.textBox1.TabIndex = 14;
+            // 
             // mainWinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 305);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.recognize);
             this.Controls.Add(this.captureTest2);
             this.Controls.Add(this.captureTest1);
@@ -177,6 +186,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgFace1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFace2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -193,6 +203,7 @@
         private System.Windows.Forms.Button captureTest1;
         private System.Windows.Forms.Button captureTest2;
         private System.Windows.Forms.Button recognize;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
