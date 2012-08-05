@@ -53,7 +53,7 @@ namespace WinFormCharpWebCam
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "C:\\imagemproc\\WinFormCharpWebCam\\Release\\OpenCV.EXE";
-            startInfo.Arguments = "C:\\imagemproc\\saida.bmp";
+            startInfo.Arguments = "webcam";
             startInfo.CreateNoWindow = true;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.UseShellExecute = false;
@@ -66,7 +66,7 @@ namespace WinFormCharpWebCam
 
 
             _FrameImage2.WaitOnLoad = false;
-            _FrameImage2.LoadAsync("C:\\imagemproc\\saida2.bmp"); ;
+            _FrameImage2.LoadAsync("C:\\imagemproc\\saida2.bmp");
 
              
 
