@@ -108,7 +108,7 @@ namespace WinFormCharpWebCam
             ExecuteOpenCV("captureTest1");
 
             imgFace1.WaitOnLoad = false;
-            imgFace1.LoadAsync("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test1.jpg");
+            imgFace1.LoadAsync("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test1_show.jpg");
         }
 
         private void captureTest2_Click(object sender, EventArgs e)
@@ -116,7 +116,7 @@ namespace WinFormCharpWebCam
             ExecuteOpenCV("captureTest2");
 
             imgFace2.WaitOnLoad = false;
-            imgFace2.LoadAsync("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2.jpg");
+            imgFace2.LoadAsync("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2_show.jpg");
         }
 
         
