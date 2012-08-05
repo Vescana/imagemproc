@@ -647,6 +647,11 @@ int main(int argc, char** argv)
 		captureTest(1);
 	else if(!strcmp(argv[1], "captureTest2"))
 		captureTest(2);
+	else if(!strcmp(argv[1], "recognize"))
+	{
+		learn();
+		recognize();
+	}
 }
 
 /* main do detector de faces , primeira tentativa
