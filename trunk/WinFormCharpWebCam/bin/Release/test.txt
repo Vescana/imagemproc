@@ -1,2 +1,2 @@
-1 train.pgm
-2 train.pgm
+1 test1.jpg
+2 test2.jpg
