@@ -119,6 +119,11 @@ namespace WinFormCharpWebCam
             imgFace2.LoadAsync("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2_show.jpg");
         }
 
+        private void recognize_Click(object sender, EventArgs e)
+        {
+            ExecuteOpenCV("recognize");
+        }
+
         
         
     }
