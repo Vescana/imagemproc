@@ -607,8 +607,28 @@ void captureTest(int argn)
 			if(imageCut->width > 70 && imageCut->height > 70)
 			{
 				imageCut = resizeImage(imageCut, 115, 115, true);
-				if(argn == 1) cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test1.jpg", imageCut);
-				else if(argn == 2) cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2.jpg", imageCut);
+				IplImage *imageGrey;
+				if (imageCut->nChannels == 3) {
+					imageGrey = cvCreateImage( cvGetSize(imageCut), IPL_DEPTH_8U, 1 );
+					// Convert from RGB (actually it is BGR) to Greyscale.
+					cvCvtColor( imageCut, imageGrey, CV_BGR2GRAY );
+				}
+				else {
+					// Just use the input image, since it is already Greyscale.
+					imageGrey = imageCut;
+				}
+
+				if(argn == 1)
+				{
+					cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test1_show.jpg", imageCut);
+					cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test1.jpg", imageGrey);
+				}else if(argn == 2)
+				{
+					cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2_show.jpg", imageCut);
+					cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2.jpg", imageGrey);
+				}
+
+				cvReleaseImage(&imageGrey);
 			}
 			cvReleaseImage(&imageCut);
 		}
