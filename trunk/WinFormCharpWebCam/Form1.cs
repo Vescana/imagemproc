@@ -122,6 +122,19 @@ namespace WinFormCharpWebCam
         private void recognize_Click(object sender, EventArgs e)
         {
             ExecuteOpenCV("recognize");
+
+            StreamReader objReader = new StreamReader("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\recognize.txt");
+            string sLine = "";
+            string[] Face = new string[2] { "Rodrigo", "Lidia" };
+
+            while (sLine != null)
+            {
+                sLine = objReader.ReadLine();
+                if (sLine != null)
+                    textBox1.Text = Face[Convert.ToInt16(sLine) - 1];
+            }
+
+            objReader.Close();
         }
 
         
