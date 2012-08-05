@@ -39,6 +39,7 @@
             this.imgFace2 = new System.Windows.Forms.PictureBox();
             this.captureTest1 = new System.Windows.Forms.Button();
             this.captureTest2 = new System.Windows.Forms.Button();
+            this.recognize = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFace1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFace2)).BeginInit();
@@ -142,11 +143,23 @@
             this.captureTest2.UseVisualStyleBackColor = true;
             this.captureTest2.Click += new System.EventHandler(this.captureTest2_Click);
             // 
+            // recognize
+            // 
+            this.recognize.Location = new System.Drawing.Point(354, 167);
+            this.recognize.Name = "recognize";
+            this.recognize.Size = new System.Drawing.Size(75, 23);
+            this.recognize.TabIndex = 13;
+            this.recognize.Text = "Reconhecer";
+            this.recognize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.recognize.UseVisualStyleBackColor = true;
+            this.recognize.Click += new System.EventHandler(this.recognize_Click);
+            // 
             // mainWinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 305);
+            this.Controls.Add(this.recognize);
             this.Controls.Add(this.captureTest2);
             this.Controls.Add(this.captureTest1);
             this.Controls.Add(this.imgFace2);
@@ -179,6 +192,7 @@
         private System.Windows.Forms.PictureBox imgFace2;
         private System.Windows.Forms.Button captureTest1;
         private System.Windows.Forms.Button captureTest2;
+        private System.Windows.Forms.Button recognize;
     }
 }
 

@@ -490,7 +490,8 @@ void doWebcam()
 	//IplImage *inputImg = cvLoadImage("C:\\Users\\max\\Desktop\\EasyWebCam\\saida.bmp",CV_LOAD_IMAGE_GRAYSCALE);
 	CvSeq * pFaceRectSeq;
 	// Haar Cascade file, used for Face Detection.	
-	char *faceCascadeFilename = "C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\haarcascade_frontalface_default.xml";
+	// Modificado de haarcascade_frontalface_default para haarcascade_profileface
+	char *faceCascadeFilename = "C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\haarcascade_profileface.xml";
 	// Load the HaarCascade classifier for face detection.
 	CvHaarClassifierCascade* faceCascade;
 	//IplImage *inputImg = cvLoadImage(argv[1]);
