@@ -14,6 +14,21 @@ namespace WinFormCharpWebCam
     //Design by Pongsakorn Poosankam
     public partial class mainWinForm : Form
     {
+        public void ExecuteOpenCV(string arg)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "C:\\imagemproc\\WinFormCharpWebCam\\Release\\OpenCV.EXE";
+            startInfo.Arguments = arg;
+            startInfo.CreateNoWindow = true;
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.UseShellExecute = false;
+            Process p;
+            p = Process.Start(startInfo);
+
+            p.WaitForExit();
+            p.Close();
+        }
+
         public mainWinForm()
         {
             InitializeComponent();
@@ -86,6 +101,22 @@ namespace WinFormCharpWebCam
         private void imgVideo_Click(object sender, EventArgs e)
         {
             bntCapture_Click(sender, e);
+        }
+
+        private void captureTest1_Click(object sender, EventArgs e)
+        {
+            ExecuteOpenCV("captureTest1");
+
+            imgFace1.WaitOnLoad = false;
+            imgFace1.LoadAsync("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test1.jpg");
+        }
+
+        private void captureTest2_Click(object sender, EventArgs e)
+        {
+            ExecuteOpenCV("captureTest2");
+
+            imgFace2.WaitOnLoad = false;
+            imgFace2.LoadAsync("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2.jpg");
         }
 
         

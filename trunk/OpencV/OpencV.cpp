@@ -417,48 +417,115 @@ IplImage* cropImage(const IplImage *img, const CvRect region)
 	return imageCropped;
 }
 
-int main(int argc, char** argv)
+// Código para redimensionar face
+IplImage* resizeImage(const IplImage *origImg, int newWidth,
+	int newHeight, bool keepAspectRatio)
 {
-  IplImage *inputImg = cvLoadImage(argv[1]);
-//IplImage *inputImg = cvLoadImage("C:\\Users\\max\\Desktop\\EasyWebCam\\saida.bmp",CV_LOAD_IMAGE_GRAYSCALE);
-CvSeq * pFaceRectSeq;
-// Haar Cascade file, used for Face Detection.	
-char *faceCascadeFilename = "C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\haarcascade_frontalface_default.xml";
-// Load the HaarCascade classifier for face detection.
-CvHaarClassifierCascade* faceCascade;
-//IplImage *inputImg = cvLoadImage(argv[1]);
-faceCascade = (CvHaarClassifierCascade*)cvLoad(faceCascadeFilename, 0, 0, 0);
-if( !faceCascade ) {
-	printf("Couldnt load Face detector '%s'\n", faceCascadeFilename);
-	exit(1);
-}
-CvMemStorage * pStorage = 0 ;
-pStorage=cvCreateMemStorage(0);
-
-pFaceRectSeq = cvHaarDetectObjects(inputImg,faceCascade,pStorage,1.1,3,CV_HAAR_DO_CANNY_PRUNING,cvSize(0,0));
-int i=0;
-
-//IplImage *imageCut;
-//imageCut = inputImg;
-
-if (i<pFaceRectSeq->total) 
-{
-	for (i=0;i<=pFaceRectSeq->total;i++)
-	{
-		CvRect * r = (CvRect *)cvGetSeqElem(pFaceRectSeq,i);
-		CvPoint pt1 = {r->x,r->y};
-		CvPoint pt2 = {r->x +r->width  ,r->y+r->height};
-
-		// Código para salvar imagem da face detectada
-		//IplImage *imageCut;
-		//imageCut = cropImage(inputImg, *r);
-		//cvSaveImage("C:\\imagemproc\\saida_cut.bmp", imageCut);
-		//cvReleaseImage(&imageCut);
-
-		// Adiciona o retângulo na face
-		cvRectangle(inputImg,pt1,pt2,CV_RGB(255,0,0),3,4,0);
+	IplImage *outImg = 0;
+	int origWidth;
+	int origHeight;
+	if (origImg) {
+		origWidth = origImg->width;
+		origHeight = origImg->height;
 	}
+	if (newWidth <= 0 || newHeight <= 0 || origImg == 0
+		|| origWidth <= 0 || origHeight <= 0) {
+		//cerr << "ERROR: Bad desired image size of " << newWidth
+		//	<< "x" << newHeight << " in resizeImage().\n";
+		exit(1);
+	}
+
+	if (keepAspectRatio) {
+		// Resize the image without changing its aspect ratio,
+		// by cropping off the edges and enlarging the middle section.
+		CvRect r;
+		// input aspect ratio
+		float origAspect = (origWidth / (float)origHeight);
+		// output aspect ratio
+		float newAspect = (newWidth / (float)newHeight);
+		// crop width to be origHeight * newAspect
+		if (origAspect > newAspect) {
+			int tw = (origHeight * newWidth) / newHeight;
+			r = cvRect((origWidth - tw)/2, 0, tw, origHeight);
+		}
+		else {	// crop height to be origWidth / newAspect
+			int th = (origWidth * newHeight) / newWidth;
+			r = cvRect(0, (origHeight - th)/2, origWidth, th);
+		}
+		IplImage *croppedImg = cropImage(origImg, r);
+
+		// Call this function again, with the new aspect ratio image.
+		// Will do a scaled image resize with the correct aspect ratio.
+		outImg = resizeImage(croppedImg, newWidth, newHeight, false);
+		cvReleaseImage( &croppedImg );
+
+	}
+	else {
+
+		// Scale the image to the new dimensions,
+		// even if the aspect ratio will be changed.
+		outImg = cvCreateImage(cvSize(newWidth, newHeight),
+			origImg->depth, origImg->nChannels);
+		if (newWidth > origImg->width && newHeight > origImg->height) {
+			// Make the image larger
+			cvResetImageROI((IplImage*)origImg);
+			// CV_INTER_LINEAR: good at enlarging.
+			// CV_INTER_CUBIC: good at enlarging.			
+			cvResize(origImg, outImg, CV_INTER_LINEAR);
+		}
+		else {
+			// Make the image smaller
+			cvResetImageROI((IplImage*)origImg);
+			// CV_INTER_AREA: good at shrinking (decimation) only.
+			cvResize(origImg, outImg, CV_INTER_AREA);
+		}
+
+	}
+	return outImg;
 }
+
+void doWebcam()
+{
+	IplImage *inputImg = cvLoadImage("C:\\imagemproc\\saida.bmp");
+	//IplImage *inputImg = cvLoadImage("C:\\Users\\max\\Desktop\\EasyWebCam\\saida.bmp",CV_LOAD_IMAGE_GRAYSCALE);
+	CvSeq * pFaceRectSeq;
+	// Haar Cascade file, used for Face Detection.	
+	char *faceCascadeFilename = "C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\haarcascade_frontalface_default.xml";
+	// Load the HaarCascade classifier for face detection.
+	CvHaarClassifierCascade* faceCascade;
+	//IplImage *inputImg = cvLoadImage(argv[1]);
+	faceCascade = (CvHaarClassifierCascade*)cvLoad(faceCascadeFilename, 0, 0, 0);
+	if( !faceCascade ) {
+		printf("Couldnt load Face detector '%s'\n", faceCascadeFilename);
+		exit(1);
+	}
+	CvMemStorage * pStorage = 0 ;
+	pStorage=cvCreateMemStorage(0);
+
+	pFaceRectSeq = cvHaarDetectObjects(inputImg,faceCascade,pStorage,1.1,3,CV_HAAR_DO_CANNY_PRUNING,cvSize(0,0));
+	int i=0;
+
+	//IplImage *imageCut;
+	//imageCut = inputImg;
+
+	if (i<pFaceRectSeq->total) 
+	{
+		for (i=0;i<=pFaceRectSeq->total;i++)
+		{
+			CvRect * r = (CvRect *)cvGetSeqElem(pFaceRectSeq,i);
+			CvPoint pt1 = {r->x,r->y};
+			CvPoint pt2 = {r->x +r->width  ,r->y+r->height};
+
+			// Código para salvar imagem da face detectada
+			//IplImage *imageCut;
+			//imageCut = cropImage(inputImg, *r);
+			//cvSaveImage("C:\\imagemproc\\saida_cut.bmp", imageCut);
+			//cvReleaseImage(&imageCut);
+
+			// Adiciona o retângulo na face
+			cvRectangle(inputImg,pt1,pt2,CV_RGB(255,0,0),3,4,0);
+		}
+	}
 
 	//cvNamedWindow( "Source", 1 );
 	//cvShowImage( "Source", inputImg );
@@ -507,7 +574,59 @@ if (i<pFaceRectSeq->total)
 	//Executado comandos do recognize
 	//learn(); //Comentado o Recognize para testes
 	//recognize();
+}
 
+void captureTest(int argn)
+{
+	IplImage *inputImg = cvLoadImage("C:\\imagemproc\\saida.bmp");
+	CvSeq * pFaceRectSeq;
+	char *faceCascadeFilename = "C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\haarcascade_frontalface_default.xml";
+	CvHaarClassifierCascade* faceCascade;
+	faceCascade = (CvHaarClassifierCascade*)cvLoad(faceCascadeFilename, 0, 0, 0);
+	if( !faceCascade ) {
+		printf("Couldnt load Face detector '%s'\n", faceCascadeFilename);
+		exit(1);
+	}
+	CvMemStorage * pStorage = 0 ;
+	pStorage=cvCreateMemStorage(0);
+
+	pFaceRectSeq = cvHaarDetectObjects(inputImg,faceCascade,pStorage,1.1,3,CV_HAAR_DO_CANNY_PRUNING,cvSize(0,0));
+	int i=0;
+
+	if (i<pFaceRectSeq->total) 
+	{
+		for (i=0;i<=pFaceRectSeq->total;i++)
+		{
+			CvRect * r = (CvRect *)cvGetSeqElem(pFaceRectSeq,i);
+			CvPoint pt1 = {r->x,r->y};
+			CvPoint pt2 = {r->x +r->width  ,r->y+r->height};
+
+			//Código para salvar imagem da face detectada
+			IplImage *imageCut;
+			imageCut = cropImage(inputImg, *r);
+			if(imageCut->width > 70 && imageCut->height > 70)
+			{
+				imageCut = resizeImage(imageCut, 115, 115, true);
+				if(argn == 1) cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test1.jpg", imageCut);
+				else if(argn == 2) cvSaveImage("C:\\imagemproc\\WinFormCharpWebCam\\bin\\Release\\test2.jpg", imageCut);
+			}
+			cvReleaseImage(&imageCut);
+		}
+	}
+
+	cvReleaseImage(&inputImg);
+	if (pStorage) cvReleaseMemStorage(&pStorage);
+	if(faceCascade) cvReleaseHaarClassifierCascade(&faceCascade);
+}
+
+int main(int argc, char** argv)
+{
+	if(!strcmp(argv[1], "webcam"))
+		doWebcam();
+	else if(!strcmp(argv[1], "captureTest1"))
+		captureTest(1);
+	else if(!strcmp(argv[1], "captureTest2"))
+		captureTest(2);
 }
 
 /* main do detector de faces , primeira tentativa
